@@ -1,0 +1,29 @@
+.main-page-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+}
+
+.client-cars {
+    border-radius: 10px;
+    width: 20vw;
+    background-color: rgb(165, 217, 255);
+}
+
+.client-cars h3 {
+    text-align: center;
+    width: 100%;
+    background-color: rgb(114, 196, 255);
+}
+
+.main-page-wrapper button {
+    width: max-content;
+    height: 3em;
+    font-size: 16px;
+    background-color: rgb(114, 196, 255);
+    border: 2px solid rgb(114, 196, 255);
+}
+
+.main-page-wrapper button:active{
+    background-color: rgb(68, 177, 255);;
+}

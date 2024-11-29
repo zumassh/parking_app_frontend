@@ -1,0 +1,78 @@
+.regForm-wrapper {
+    margin: 10px auto;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center; 
+    height: 70vh;
+    width: 30vw;
+    background-color: rgb(165, 217, 255);
+    border-radius: 10px;
+    font-size: 25px;
+}
+
+.regForm-wrapper p {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 40%;
+    background-color: rgb(229, 245, 255);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.form input {
+    border: 1px solid rgb(133, 204, 255);
+    border-radius: 10px;
+    height: 2em;
+}
+
+.form button {
+    width: fit-content;
+    margin: 10px 0px;
+    height: 2em;
+    font-size: 25px;
+    background-color: rgb(133, 204, 255);
+    border: 2px solid rgb(133, 204, 255);
+    border-radius: 10px;
+}
+
+.form button:active{
+    background-color: rgb(91, 187, 255);;
+}
+
+.form p {
+    color: red;
+    margin: 0;
+    height: 1em;
+    text-align: center;
+}
+
+.regForm-innerWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px 10px 10px 10px;
+}
+
+.regForm-innerWrapper button{
+    width: fit-content;
+    height: 2em;
+    font-size: 25px;
+    background-color: rgb(229, 245, 255);
+    border: 2px solid rgb(229, 245, 255);
+    border-radius: 10px;
+}
+
+.regForm-innerWrapper button:hover{
+    background-color:rgb(133, 204, 255);
+}

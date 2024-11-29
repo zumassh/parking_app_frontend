@@ -1,0 +1,63 @@
+body {
+    background-color: rgb(229, 245, 255);
+}
+
+main {
+    margin: 100px 10px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(165, 217, 255);
+}
+
+.header button {
+    width: 5em;
+    height: 3em;
+    font-size: 25px;
+    background-color: rgb(165, 217, 255);
+    border: 2px solid rgb(165, 217, 255);
+    border-bottom: 2px solid rgb(165, 217, 255);
+    border-top: 2px solid rgb(165, 217, 255);
+}
+
+.header button:hover{
+    border-bottom: 5px solid rgb(130, 130, 255);
+    border-top: 5px solid rgb(130, 130, 255);
+}
+
+.header h1 {
+    color: rgb(8, 0, 35);
+    margin-left: 3em;
+}
+
+nav {
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+}
+
+.footer {
+    background-color: rgb(229, 245, 255);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}

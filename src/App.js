@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import './styles/App.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import RegForm from "./components/RegForm";
+import MainPage from "./components/MainPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+function App(props) {
+    const [reg, setReg] = useState(false);
+    const [userId, setUserId] = useState(null);
+
+    const handleRegistration = (id) => {
+      setReg(true);
+      setUserId(id);
+    };
+
+    const handleLogout = (id) => {
+      setReg(false);
+      setUserId(id);
+  };
+
+    return (
+      <div>
+        <Header onLogout={handleLogout}/>
+        <main>
+          {reg ? (
+            <MainPage userId={userId} />
+          ):(
+            <RegForm onRegister={handleRegistration}/> 
+          )}
+        </main>
+        <Footer />
+      </div>
+    );
+};
 
 export default App;
