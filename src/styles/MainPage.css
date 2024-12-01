@@ -1,15 +1,18 @@
 .main-page-wrapper {
     width: 100%;
-    display: grid;
-    grid-template-areas: 
-        "cc addc cp cp"
-        "cc cw p p"
-        "cc cw p p";
-    gap: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.add-cars_and_wallet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
 }
 
 .client-cars {
-    grid-area: cc;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,9 +49,8 @@
 }
 
 .addCars {
-    grid-area: addc;
     border-radius: 10px;
-    width: 20vw;
+    width: 30vw;
     height: fit-content;
     background-color: rgb(165, 217, 255);
 }
@@ -91,7 +93,6 @@
 }
 
 .client-wallet {
-    grid-area: cw;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -131,18 +132,24 @@
     padding: 10px 20px 10px 20px;;
 }
 
-.parking {
-    grid-area: p;
+.client-reservations {
+    border-radius: 10px;
+    background-color: rgb(165, 217, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.current-parking {
-    grid-area: cp;
+.client-reservations li{
+    list-style-type: none;
 }
 
 .parking {
     display: flex;
     flex-direction: column;
+    width: 30vw;
     gap: 1em;
+    padding-bottom: 1em;
     border-radius: 10px;
     background-color: rgb(165, 217, 255);
 }
@@ -155,4 +162,3 @@
 .parking-select {
     margin: 0 1em;
 }
-

@@ -221,43 +221,6 @@ function MainPage({ userId, phone }) {
 
     return (
         <div className="main-page-wrapper">
-            <div className="client-reservations">
-                <h3>Ваши бронирования</h3>
-                {reservations.map((reservation) => {
-                    const now = Date.now();
-                    const startTime = parseServerTimeToUTC(reservation.startTime);
-                    const endTime = parseServerTimeToUTC(reservation.endTime);
-                    return (
-                        <li key={reservation.id}>
-                            <p>
-                                Машина: {reservation.car.name} ({reservation.car.number})
-                            </p>
-                            <p>
-                                Парковка: {reservation.parkingSpot.spotNumber} (ID: {reservation.parkingSpot.parkingId})
-                            </p>
-                            <p>Тип брони: {reservation.reserveType}</p>
-                            {now < startTime ? (
-                                <p>Ожидает начала: {new Date(startTime).toLocaleString()}</p>
-                                ) : now > endTime ? (
-                                    <p>Бронь истекла</p>
-                                ) : (
-                                    <p>
-                                        Осталось времени:{" "}
-                                        {timers[reservation.id] !== undefined
-                                            ? formatTime(timers[reservation.id])
-                                            : "Загрузка..."}
-                                    </p>
-                            )}
-                            
-                           
-                            
-                            <hr />
-                        </li>
-                    );
-            })}
-                {error && <p style={{ color: "red" }}>{error}</p>}
-            </div>
-
             <div className="client-cars">
                 <h3>Ваши автомобили</h3>
                 {userAuto.length > 0 ? (
@@ -275,95 +238,131 @@ function MainPage({ userId, phone }) {
                     <p>Пусто</p>
                 )}
             </div>
-
-            <div className="addCars">
-                <h3>Добавить автомобиль</h3>
-                <form onSubmit={handleCarAdding}>
-                    <input
-                        type="text"
-                        placeholder="Название автомобиля"
-                        value={carName}
-                        onChange={(e) => setCarName(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="А000АА00"
-                        value={carNumber}
-                        onChange={(e) => setCarNumber(e.target.value)}
-                    />
-                    {!isValidCarNumber(carNumber) && carNumber && (
-                        <p style={{ color: "red" }}>Некорректный номер автомобиля</p>
-                    )}
-                    <button type="submit" disabled={!carName || !carNumber || !isValidCarNumber(carNumber)}>
-                        добавить
-                    </button>
-                </form>
-            </div>
-
-            <div className="client-wallet">
-                <h3>Кошелек</h3>
-                <div className="current-money">
-                    <b>Текущий парковочный счет: </b>{wallet}<span> ₽</span>
-                </div>
-                <form className="wallet-form" onSubmit={addMoney}>
-                    <label>Введите сумму для пополнения: </label>
-                    <input 
-                        type="number" 
-                        name="money" 
-                        pattern="\d*"
-                        placeholder="100₽" 
-                        value={money} 
-                        onChange={(e) => setMoney(Number(e.target.value))} 
-                    />
-                    <button type="submit">
-                        пополнить
-                    </button>
-                </form>
-            </div>
-
-            <div className="parking">
-                <h3>Оплата парковки</h3>
-                <div className="parking-filter">
-                    <label>
+            
+            <div className="add-cars_and_wallet">
+                <div className="addCars">
+                    <h3>Добавить автомобиль</h3>
+                    <form onSubmit={handleCarAdding}>
                         <input
-                            type="checkbox"
-                            name="reservable"
-                            checked={reservable}
-                            onChange={(e) => setReservable(e.target.checked)}
+                            type="text"
+                            placeholder="Название автомобиля"
+                            value={carName}
+                            onChange={(e) => setCarName(e.target.value)}
                         />
-                        Бронь
-                    </label>
-                    <label>
                         <input
-                            type="checkbox"
-                            name="subscribeable"
-                            checked={subscribeable}
-                            onChange={(e) => setSubscribeable(e.target.checked)}
+                            type="text"
+                            placeholder="А000АА00"
+                            value={carNumber}
+                            onChange={(e) => setCarNumber(e.target.value)}
                         />
-                        Абонемент
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="temporary"
-                            checked={temporary}
-                            onChange={(e) => setTemporary(e.target.checked)}
+                        {!isValidCarNumber(carNumber) && carNumber && (
+                            <p style={{ color: "red" }}>Некорректный номер автомобиля</p>
+                        )}
+                        <button type="submit" disabled={!carName || !carNumber || !isValidCarNumber(carNumber)}>
+                            добавить
+                        </button>
+                    </form>
+                </div>
+
+                <div className="client-wallet">
+                    <h3>Кошелек</h3>
+                    <div className="current-money">
+                        <b>Текущий парковочный счет: </b>{wallet}<span> ₽</span>
+                    </div>
+                    <form className="wallet-form" onSubmit={addMoney}>
+                        <label>Введите сумму для пополнения: </label>
+                        <input 
+                            type="number" 
+                            name="money" 
+                            pattern="\d*"
+                            placeholder="100₽" 
+                            value={money} 
+                            onChange={(e) => setMoney(Number(e.target.value))} 
                         />
-                        Временная парковка
-                    </label>
+                        <button type="submit">
+                            пополнить
+                        </button>
+                    </form>
                 </div>
-                <div className="parking-select">
-                    <Select
-                        options={parkingOptions}
-                        value={selectedParking ? { value: selectedParking, label: selectedParking.address } : null}
-                        onChange={handleParkingChange}
-                        placeholder="Выберите парковку"
-                        isSearchable={true}
-                    />
+
+                <div className="parking">
+                    <h3>Оплата парковки</h3>
+                    <div className="parking-filter">
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="reservable"
+                                checked={reservable}
+                                onChange={(e) => setReservable(e.target.checked)}
+                            />
+                            Бронь
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="subscribeable"
+                                checked={subscribeable}
+                                onChange={(e) => setSubscribeable(e.target.checked)}
+                            />
+                            Абонемент
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="temporary"
+                                checked={temporary}
+                                onChange={(e) => setTemporary(e.target.checked)}
+                            />
+                            Временная парковка
+                        </label>
+                    </div>
+                    <div className="parking-select">
+                        <Select
+                            options={parkingOptions}
+                            value={selectedParking ? { value: selectedParking, label: selectedParking.address } : null}
+                            onChange={handleParkingChange}
+                            placeholder="Выберите парковку"
+                            isSearchable={true}
+                        />
+                    </div>
+                    {error && <p style={{ color: "red" }}>{error}</p>}
+                    {selectedParking && <Option selectedParking={selectedParking} userAuto={userAuto} fetchMoney={fetchMoney} fetchReservations={fetchReservations}/>}
                 </div>
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {selectedParking && <Option selectedParking={selectedParking} userAuto={userAuto} fetchMoney={fetchMoney} fetchReservations={fetchReservations}/>}
             </div>
+            <div className="client-reservations">
+                    <h3>Ваши бронирования</h3>
+                    {reservations.map((reservation) => {
+                        const now = Date.now();
+                        const startTime = parseServerTimeToUTC(reservation.startTime);
+                        const endTime = parseServerTimeToUTC(reservation.endTime);
+                        return (
+                            <li key={reservation.id}>
+                                <p>
+                                    Машина: {reservation.car.name} ({reservation.car.number})
+                                </p>
+                                <p>
+                                    Номер парковочного места: {reservation.parkingSpot.spotNumber} (ID: {reservation.parkingSpot.parkingId})
+                                </p>
+                                <p>Адрес: {reservation.parkingAddress}</p>
+                                <p>Тип брони: {reservation.reserveType}</p>
+                                {now < startTime ? (
+                                    <p>Ожидает начала: {new Date(startTime).toLocaleString()}</p>
+                                    ) : now > endTime ? (
+                                        <p>Бронь истекла</p>
+                                    ) : (
+                                        <p>
+                                            Осталось времени:{" "}
+                                            {timers[reservation.id] !== undefined
+                                                ? formatTime(timers[reservation.id])
+                                                : "Загрузка..."}
+                                        </p>
+                                )}
+                                <hr />
+                            </li>
+                        );
+                    })}
+                    {error && <p style={{ color: "red" }}>{error}</p>}
+                </div>
         </div>
     );
 }
