@@ -4,32 +4,36 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RegForm from "./components/RegForm";
 import MainPage from "./components/MainPage";
-import AdminPanel from "./components/AdminPanel"; // Импорт компонента админки
+import AdminPanel from "./components/AdminPanel";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
     const [reg, setReg] = useState(false);
     const [phone, setPhone] = useState("");
     const [userId, setUserId] = useState(null);
-    const [loading, setLoading] = useState(true); // Индикатор загрузки
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedId = localStorage.getItem("userId");
         const storedPhone = localStorage.getItem("phone");
-        if (storedId) {
+        if (storedId && storedId !== "undefined") { // Проверка, чтобы избежать "undefined"
             setUserId(storedId);
             setPhone(storedPhone || "");
             setReg(true);
         }
-        setLoading(false); // Завершение загрузки
-    }, []); // Выполняется только при монтировании
+        setLoading(false);
+    }, []);
 
     const handleRegistration = (id, phone) => {
-        localStorage.setItem("userId", id);
-        localStorage.setItem("phone", phone);
-        setPhone(phone);
-        setReg(true);
-        setUserId(id);
+        if (id && phone) { // Проверка перед сохранением
+            localStorage.setItem("userId", id);
+            localStorage.setItem("phone", phone);
+            setPhone(phone);
+            setReg(true);
+            setUserId(id);
+        } else {
+            console.error("Ошибка: Пустые данные для регистрации");
+        }
     };
 
     const handleLogout = () => {
@@ -43,7 +47,7 @@ function App() {
     };
 
     if (loading) {
-        return <div>Загрузка...</div>; // Пока данные загружаются, показываем индикатор
+        return <div>Загрузка...</div>;
     }
 
     return (

@@ -3,7 +3,7 @@ import axios from "axios";
 import '../styles/MainPage.css';
 import Select from 'react-select';
 import Option from './Option';
-
+import config from '../config/config'
 function MainPage({ userId, phone }) {
     const [userAuto, setUserAuto] = useState([]);
     const [error, setError] = useState("");
@@ -35,7 +35,7 @@ function MainPage({ userId, phone }) {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:80/users/${userId}/cars`)
+            .get(`${config.apiBaseUrl}/users/${userId}/cars`)
             .then((response) => {
                 console.log(response.data);
                 setUserAuto(response.data);
@@ -52,7 +52,7 @@ function MainPage({ userId, phone }) {
     
     const fetchReservations = async () => {
         try {
-            const response = await axios.get(`http://localhost:80/reserves/user/${userId}`);
+            const response = await axios.get(`${config.apiBaseUrl}/reserves/user/${userId}`);
             setReservations(response.data);
             initializeTimers(response.data);
         } catch (error) {
@@ -63,7 +63,7 @@ function MainPage({ userId, phone }) {
 
     const deleteCar = async (carNumber) => {
         try {
-            const response = await axios.delete("http://localhost:80/cars", {
+            const response = await axios.delete(`http://${config.apiBaseUrl}/cars`, {
                 params: { number: carNumber },
             });
             setUserAuto((prevCars) =>
@@ -84,7 +84,7 @@ function MainPage({ userId, phone }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:80/cars", data, {
+            const response = await axios.post(`${config.apiBaseUrl}/cars`, data, {
                 params: { userId },
             });
             setUserAuto((prevCars) => [...prevCars, response.data]);
@@ -104,7 +104,7 @@ function MainPage({ userId, phone }) {
         const amount = parseInt(money, 10);
         try {
             const response = await axios.post(
-                `http://localhost:80/users/${userId}/wallet`,
+                `${config.apiBaseUrl}/users/${userId}/wallet`,
                 null,
                 {
                     params: {
@@ -124,7 +124,7 @@ function MainPage({ userId, phone }) {
 
     const fetchMoney = async () => {
         try {
-            const response = await axios.get(`http://localhost:80/users/${userId}/wallet`, {
+            const response = await axios.get(`${config.apiBaseUrl}/users/${userId}/wallet`, {
                 params: { phoneNumber: phone },
             });
             setWallet(response.data);
@@ -137,7 +137,7 @@ function MainPage({ userId, phone }) {
 
     const fetchParkings = async () => {
         try {
-            const response = await axios.get("http://localhost:80/parking/free");
+            const response = await axios.get(`${config.apiBaseUrl}/parking/free`);
             console.log(response.data);
             setParkings(response.data);
             setFilteredParkings(response.data);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { LocalizationProvider, TimePicker, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { TextField, MenuItem, Select, InputLabel, FormControl, CircularProgress, Alert } from "@mui/material";
+import config from "../config/config";
 import "../styles/Payment.css";
 
 function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReservations }) {
@@ -54,7 +55,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             price: cost
         };
         console.log(requestBody);
-        axios.post(`http://localhost:80/parking-spots/assign/temporary`, requestBody)
+        axios.post(`${config.apiBaseUrl}/assign/temporary`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()
@@ -79,7 +80,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             endTime: endTime,
             price: 5000
         };
-        axios.post(`http://localhost:80/parking-spots/assign/subscribe`, requestBody)
+        axios.post(`${config.apiBaseUrl}/parking-spots/assign/subscribe`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()
@@ -105,7 +106,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             price: cost
         };
         console.log(requestBody);
-        axios.post(`http://localhost:80/parking-spots/assign/reserve`, requestBody)
+        axios.post(`${config.apiBaseUrl}/parking-spots/assign/reserve`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()

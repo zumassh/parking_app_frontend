@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/RegForm.css";
 import axios from "axios";
+import config from "../config/config";
 
 function RegForm({ onRegister }) {
     const [view, setView] = useState("login");
@@ -21,7 +22,7 @@ function RegForm({ onRegister }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:80/users/registration", data);
+            const response = await axios.post(`${config.apiBaseUrl}/users/registration`, data);
             const id = response.data.id;
             localStorage.setItem("userId", id)
             setUserId(id);
@@ -46,7 +47,7 @@ function RegForm({ onRegister }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:80/users/login", data);
+            const response = await axios.post(`${config.apiBaseUrl}/users/login`, data);
             const id = response.data.id;
             setUserId(id);
             setMessage(`${response.data.message || "Вход выполнен успешно"}`);

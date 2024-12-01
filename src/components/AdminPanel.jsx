@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from "../config/config";
+
 import "../styles/AdminPanel.css"
 function AdminPanel() {
     const [address, setAddress] = useState("");
@@ -24,7 +26,7 @@ function AdminPanel() {
         };
 
         try {
-            const response = await axios.post("http://localhost:80/parking", parkingData);
+            const response = await axios.post(`${config.apiBaseUrl}/parking`, parkingData);
             setSuccessMessage("Парковка успешно добавлена!");
             setAddress("");
             setReservable(false);
