@@ -63,7 +63,7 @@ function MainPage({ userId, phone }) {
 
     const deleteCar = async (carNumber) => {
         try {
-            const response = await axios.delete(`http://${config.apiBaseUrl}/cars`, {
+            const response = await axios.delete(`${config.apiBaseUrl}/cars`, {
                 params: { number: carNumber },
             });
             setUserAuto((prevCars) =>
