@@ -55,7 +55,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             price: cost
         };
         console.log(requestBody);
-        axios.post(`${config.apiBaseUrl}/assign/temporary`, requestBody)
+        axios.post(`${config.apiBaseUrl}/parking-spots/assign/temporary`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()
