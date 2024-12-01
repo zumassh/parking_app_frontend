@@ -6,33 +6,50 @@ import Footer from "./components/Footer";
 import RegForm from "./components/RegForm";
 import MainPage from "./components/MainPage";
 
-function App(props) {
+function App() {
     const [reg, setReg] = useState(false);
+    const [phone, setPhone] = useState("");
     const [userId, setUserId] = useState(null);
 
-    const handleRegistration = (id) => {
-      setReg(true);
-      setUserId(id);
+    useEffect(() => {
+        const storedId = localStorage.getItem("userId");
+        const storedPhone = localStorage.getItem("phone");
+        if (storedId) {
+            setUserId(storedId);
+            setPhone(storedPhone || "");
+            setReg(true);
+        }
+    }, []); // Пустой массив зависимостей для запуска только при монтировании
+
+    const handleRegistration = (id, phone) => {
+        localStorage.setItem("userId", id);
+        localStorage.setItem("phone", phone);
+        setPhone(phone);
+        setReg(true);
+        setUserId(id);
     };
 
-    const handleLogout = (id) => {
-      setReg(false);
-      setUserId(id);
-  };
+    const handleLogout = () => {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("phone");
+        setReg(false);
+        setUserId(null);
+        setPhone("");
+    };
 
     return (
-      <div>
-        <Header onLogout={handleLogout}/>
-        <main>
-          {reg ? (
-            <MainPage userId={userId} />
-          ):(
-            <RegForm onRegister={handleRegistration}/> 
-          )}
-        </main>
-        <Footer />
-      </div>
+        <div className="wrapper">
+            <Header onLogout={handleLogout} />
+            <main>
+                {reg ? (
+                    <MainPage userId={userId} phone={phone} />
+                ) : (
+                    <RegForm onRegister={handleRegistration} />
+                )}
+            </main>
+            <Footer />
+        </div>
     );
-};
+}
 
 export default App;

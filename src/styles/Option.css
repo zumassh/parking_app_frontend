@@ -1,0 +1,39 @@
+.option-buttons-wrapper {
+    margin: 0 2em;
+}
+
+
+.option-button {
+    width: max-content;
+    height: 3em;
+    font-size: 16px;
+    background-color: rgb(114, 196, 255);
+    border: 2px solid rgb(114, 196, 255);
+    border-radius: 10px;
+    margin-bottom: 1em;
+    background-color: rgb(165, 217, 255) !important;
+    border: 2px solid rgb(165, 217, 255);
+    border-bottom: 2px solid rgb(165, 217, 255);
+    border-top: 2px solid #a5d9ff;
+    border-radius: 0 !important; 
+}
+
+.option-button:hover{
+    border-bottom: 5px solid rgb(130, 130, 255);
+    border-top: 5px solid rgb(130, 130, 255);
+}
+
+.option-button-active {
+    width: max-content;
+    height: 3em;
+    font-size: 16px;
+    background-color: rgb(114, 196, 255);
+    border: 2px solid rgb(114, 196, 255);
+    border-radius: 10px;
+    margin-bottom: 1em;
+    border: 2px solid rgb(165, 217, 255);
+    border-bottom: 2px solid rgb(165, 217, 255);
+    border-top: 2px solid rgb(165, 217, 255);
+    border-radius: 0 !important;
+}
+

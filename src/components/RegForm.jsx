@@ -23,10 +23,10 @@ function RegForm({ onRegister }) {
         try {
             const response = await axios.post("http://localhost:8080/users/registration", data);
             const id = response.data.id;
+            localStorage.setItem("userId", id)
             setUserId(id);
             setMessage(`Успех: ${response.data.message || "Вход выполнен успешно"}`);
-            console.log(id);
-            onRegister(id);
+            onRegister(id, phone);
         } 
         catch (error) {
             if (error.response) {
@@ -50,8 +50,9 @@ function RegForm({ onRegister }) {
             const id = response.data.id;
             setUserId(id);
             setMessage(`${response.data.message || "Вход выполнен успешно"}`);
+            localStorage.setItem("userId", id)
             console.log("Ответ сервера:", response.data);
-            onRegister(id);
+            onRegister(id, phone);
         } 
         catch (error) {
             if (error.response) {

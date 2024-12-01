@@ -12,7 +12,7 @@ function Header({onLogout}) {
             <h1>Твоя парковка</h1>
             <nav>
                 <button onClick={onLogout}>вход</button>
-                {/* <button onClick={scrollToFooter}>контакты</button>  */}
+                {<button onClick={scrollToFooter}>контакты</button>}
             </nav>
         </div>
     );

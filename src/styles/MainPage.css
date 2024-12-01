@@ -1,29 +1,158 @@
 .main-page-wrapper {
     width: 100%;
-    display: flex;
-    gap: 50px;
+    display: grid;
+    grid-template-areas: 
+        "cc addc cp cp"
+        "cc cw p p"
+        "cc cw p p";
+    gap: 30px;
 }
 
 .client-cars {
+    grid-area: cc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 10px;
     width: 20vw;
     background-color: rgb(165, 217, 255);
 }
 
-.client-cars h3 {
-    text-align: center;
-    width: 100%;
-    background-color: rgb(114, 196, 255);
+.client-cars ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
 }
 
-.main-page-wrapper button {
+.client-cars button {
     width: max-content;
     height: 3em;
     font-size: 16px;
     background-color: rgb(114, 196, 255);
     border: 2px solid rgb(114, 196, 255);
+    border-radius: 10px;
+    margin-bottom: 1em;
 }
+
+.main-page-wrapper h3 {
+    text-align: center;
+    width: 100%;
+    background-color: rgb(114, 196, 255);
+}
+
 
 .main-page-wrapper button:active{
     background-color: rgb(68, 177, 255);;
 }
+
+.addCars {
+    grid-area: addc;
+    border-radius: 10px;
+    width: 20vw;
+    height: fit-content;
+    background-color: rgb(165, 217, 255);
+}
+
+.addCars form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    border-radius: 10px;
+}
+
+.addCars input {
+    border: 1px solid rgb(133, 204, 255);
+    border-radius: 10px;
+    height: 2em;
+    width: max-content;
+}
+
+.addCars button {
+    width: fit-content;
+    margin-bottom: 10px;
+    height: 2em;
+    font-size: 25px;
+    background-color: rgb(133, 204, 255);
+    border: 2px solid rgb(133, 204, 255);
+    border-radius: 10px;
+}
+
+.addCars button:active{
+    background-color: rgb(91, 187, 255);;
+}
+
+.addCars p {
+    color: red;
+    margin: 0;
+    height: 1em;
+    text-align: center;
+}
+
+.client-wallet {
+    grid-area: cw;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 30vw;
+    height: fit-content;
+    gap: 10px;
+    background-color: rgb(165, 217, 255);
+}
+
+.wallet-form {
+    padding: 10px 20px 10px 20px;
+}
+
+.wallet-form button {
+    width: max-content;
+    height: 3em;
+    font-size: 16px;
+    background-color: rgb(114, 196, 255);
+    border: 2px solid rgb(114, 196, 255);
+    border-radius: 10px;
+    margin-bottom: 1em;
+}
+
+.wallet-form button:active{
+    background-color: rgb(91, 187, 255);;
+}
+
+.wallet-form input {
+    border: 1px solid rgb(133, 204, 255);
+    border-radius: 10px;
+    height: 2em;
+    width: max-content;
+}
+
+.current-money {
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;;
+}
+
+.parking {
+    grid-area: p;
+}
+
+.current-parking {
+    grid-area: cp;
+}
+
+.parking {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 10px;
+    background-color: rgb(165, 217, 255);
+}
+
+.parking-filter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.parking-select {
+    margin: 0 1em;
+}
+
