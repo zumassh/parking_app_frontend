@@ -21,7 +21,7 @@ function RegForm({ onRegister }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/users/registration", data);
+            const response = await axios.post("http://localhost:80/users/registration", data);
             const id = response.data.id;
             localStorage.setItem("userId", id)
             setUserId(id);
@@ -46,7 +46,7 @@ function RegForm({ onRegister }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/users/login", data);
+            const response = await axios.post("http://localhost:80/users/login", data);
             const id = response.data.id;
             setUserId(id);
             setMessage(`${response.data.message || "Вход выполнен успешно"}`);

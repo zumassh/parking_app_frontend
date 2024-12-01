@@ -54,7 +54,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             price: cost
         };
         console.log(requestBody);
-        axios.post(`http://localhost:8080/parking-spots/assign/temporary`, requestBody)
+        axios.post(`http://localhost:80/parking-spots/assign/temporary`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()
@@ -79,7 +79,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             endTime: endTime,
             price: 5000
         };
-        axios.post(`http://localhost:8080/parking-spots/assign/subscribe`, requestBody)
+        axios.post(`http://localhost:80/parking-spots/assign/subscribe`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()
@@ -105,7 +105,7 @@ function Payment({ optionType, userAuto, selectedParking, fetchMoney, fetchReser
             price: cost
         };
         console.log(requestBody);
-        axios.post(`http://localhost:8080/parking-spots/assign/reserve`, requestBody)
+        axios.post(`http://localhost:80/parking-spots/assign/reserve`, requestBody)
             .then(response => {
                 fetchMoney()
                 fetchReservations()

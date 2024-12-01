@@ -35,7 +35,7 @@ function MainPage({ userId, phone }) {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/users/${userId}/cars`)
+            .get(`http://localhost:80/users/${userId}/cars`)
             .then((response) => {
                 console.log(response.data);
                 setUserAuto(response.data);
@@ -52,7 +52,7 @@ function MainPage({ userId, phone }) {
     
     const fetchReservations = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/reserves/user/${userId}`);
+            const response = await axios.get(`http://localhost:80/reserves/user/${userId}`);
             setReservations(response.data);
             initializeTimers(response.data);
         } catch (error) {
@@ -63,7 +63,7 @@ function MainPage({ userId, phone }) {
 
     const deleteCar = async (carNumber) => {
         try {
-            const response = await axios.delete("http://localhost:8080/cars", {
+            const response = await axios.delete("http://localhost:80/cars", {
                 params: { number: carNumber },
             });
             setUserAuto((prevCars) =>
@@ -84,7 +84,7 @@ function MainPage({ userId, phone }) {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/cars", data, {
+            const response = await axios.post("http://localhost:80/cars", data, {
                 params: { userId },
             });
             setUserAuto((prevCars) => [...prevCars, response.data]);
@@ -104,7 +104,7 @@ function MainPage({ userId, phone }) {
         const amount = parseInt(money, 10);
         try {
             const response = await axios.post(
-                `http://localhost:8080/users/${userId}/wallet`,
+                `http://localhost:80/users/${userId}/wallet`,
                 null,
                 {
                     params: {
@@ -124,7 +124,7 @@ function MainPage({ userId, phone }) {
 
     const fetchMoney = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/users/${userId}/wallet`, {
+            const response = await axios.get(`http://localhost:80/users/${userId}/wallet`, {
                 params: { phoneNumber: phone },
             });
             setWallet(response.data);
@@ -137,7 +137,7 @@ function MainPage({ userId, phone }) {
 
     const fetchParkings = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/parking/free");
+            const response = await axios.get("http://localhost:80/parking/free");
             console.log(response.data);
             setParkings(response.data);
             setFilteredParkings(response.data);

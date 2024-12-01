@@ -24,7 +24,7 @@ function AdminPanel() {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/parking", parkingData);
+            const response = await axios.post("http://localhost:80/parking", parkingData);
             setSuccessMessage("Парковка успешно добавлена!");
             setAddress("");
             setReservable(false);
